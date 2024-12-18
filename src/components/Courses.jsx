@@ -4,8 +4,10 @@ import { BackgroundGradient } from "./ui/background-gradient";
 import { useRouter } from "next/navigation";
 import Image from "next/image"; // Importing Image from next/image
 
+// Fetch function that uses the API URL from environment variables
 async function getCards() {
-  const response = await fetch("http://localhost:3000/api/cards");
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Use environment variable
+  const response = await fetch(`${apiUrl}/api/cards`);
   if (!response.ok) {
     throw new Error("Failed to fetch card data");
   }
@@ -44,7 +46,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const data = await getCards();
+        const data = await getCards(); // Fetch cards data from the API
         setCards(data);
       } catch (err) {
         if (err instanceof Error) {
