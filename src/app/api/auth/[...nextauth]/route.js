@@ -20,10 +20,7 @@ export const authOptions = {
 
       if (account?.provider === "google") {
         try {
-          // Use NEXTAUTH_URL in production and fallback to localhost in development
-          const apiUrl = process.env.NEXTAUTH_URL || "http://localhost:3000"; // Default to localhost for development
-
-          const response = await fetch(`${apiUrl}/api/user`, {
+          const response = await fetch("https://master-delta-seven.vercel.app/api/user", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
