@@ -7,15 +7,20 @@ import Image from "next/image"; // Importing Image from next/image
 // Fetch function that uses the API URL from environment variables
 async function getCards() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Use environment variable
+  if (!apiUrl) {
+    throw new Error("NEXT_PUBLIC_API_URL is not defined in environment variables");
+  }
+
   const response = await fetch(`${apiUrl}/api/cards`);
   if (!response.ok) {
-    throw new Error("Failed to fetch card data");
+    throw new Error(`Failed to fetch card data: ${response.statusText}`);
   }
+
   const data = await response.json();
   return data;
 }
 
-const Card = ({ title, description, imageUrl, onClick }) => (
+const Card = ({ title, imageUrl, onClick }) => (
   <BackgroundGradient>
     <div
       className="bg-white dark:bg-gray-800 shadow-md rounded-[33px] overflow-hidden cursor-pointer h-60"
@@ -28,6 +33,7 @@ const Card = ({ title, description, imageUrl, onClick }) => (
         className="w-full h-40 object-cover rounded-t-md"
         width={500} // Specify the width of the image
         height={200} // Specify the height of the image
+        priority // Improve image loading
       />
       <div className="p-4">
         <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">
@@ -49,11 +55,7 @@ const Courses = () => {
         const data = await getCards(); // Fetch cards data from the API
         setCards(data);
       } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
       } finally {
         setLoading(false);
       }
@@ -63,6 +65,7 @@ const Courses = () => {
   }, []);
 
   const router = useRouter();
+
   const handleClick = (id) => {
     router.push(`/api/cards/${id}`);
   };
@@ -99,7 +102,6 @@ const Courses = () => {
             <Card
               key={card.id}
               title={card.title}
-              description={card.description}
               imageUrl={card.imageUrl}
               onClick={() => handleClick(card.id)}
             />
@@ -111,3 +113,4 @@ const Courses = () => {
 };
 
 export default Courses;
+
