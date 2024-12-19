@@ -1,6 +1,8 @@
 import Courses from "@/components/Courses";
 import HeroSection from "@/components/HeroScene";
 import TestimonialCards from "@/components/Testimonials";
+import Tutors from "@/components/Tutors";
+
 
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
      <HeroSection/>
      <Courses/>
      <TestimonialCards/>
+     <Tutors/>
+    
   </main>
   );
 }

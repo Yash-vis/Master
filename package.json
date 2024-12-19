@@ -17,6 +17,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "simplex-noise": "^4.0.3",
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
