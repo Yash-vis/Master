@@ -11,7 +11,7 @@ export const cards = [
         { title: "Introduction", url: "https://videos.pexels.com/video-files/29725551/12779576_2560_1440_30fps.mp4" },
         { title: "Grammer", url: "/videos/js-functions.mp4" },
       ],
-      pdfUrl: "/pdfs/yash.pdf",
+      pdfUrl: "/pdfs/1.pdf",
       faculty:"Yashdeep Sir"
     },
     {
@@ -22,6 +22,8 @@ export const cards = [
       duration: "24 months",
       fee: 2,
       hasFreeTrial: true, 
+      pdfUrl: "/pdfs/count.pdf",
+      faculty:"Zeius Sir"
     },
     {
       id: 3,
